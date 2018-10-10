@@ -7,7 +7,7 @@ App.directive('navmenu', function(){
         scope: 'isolate',
         locals: { service: 'bind'},
         templateUrl: function(elem, attr){
-            return '/Shared/navmenu.html';
+            return '/Views/Shared/navmenu.html';
         }
     }
 });
