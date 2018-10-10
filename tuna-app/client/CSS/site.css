@@ -43,3 +43,8 @@ header{
   tr:nth-child(even) {
       background-color: #dddddd;
   }
+
+  .app-body{
+    margin-top: 125px;
+    padding: 50px;
+  }
