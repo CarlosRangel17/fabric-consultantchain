@@ -1,0 +1,133 @@
+<!-- Show peers dashboard -->
+
+<link href="../../CSS/market.css" rel="stylesheet">  
+
+<div class="container" ng-init="init()">
+    <h1 class="app-blue">Market</h2>
+    <div class="row">
+               <!-- Table Search -->
+               <div class="table-search col-md-12">
+                    <select id="asset-filter" class="filter-box col-md-2 pull-right">
+                        <option class="filter-box-option" value="All">All</option>
+                        <option class="filter-box-option" value="Latest">Latest</option>
+                        <option class="filter-box-option" value="MostReviewed">Most Reviewed</option>
+                        <option class="filter-box-option" value="BA">BA Developer</option>
+                        <option class="filter-box-option" value="BI">BI Developer</option>
+                        <option class="filter-box-option" value="Blockchain">Blockchain Developer</option>
+                        <option class="filter-box-option" value="Cloud">Cloud Developer</option>
+                        <option class="filter-box-option" value="Mobile">Mobile Developer</option>
+                        <option class="filter-box-option" value="Mobile">Web Developer</option>
+                    </select>
+                    <label class="label filter-search pull-right" for="asset-filter"> Filter: </label>
+                    
+                    <label class="label filter-search pull-left" for="asset-filter"> Search: </label>
+                    <div class="search-bar col-md-6 pull-left">
+                        <input id="asset-search" class="form-control" type="text" placeholder="Search" aria-label="Search The Decentralized Consultant Market">
+                        <i class="glyphicon glyphicon-search"></i>
+                    </div>
+            </div>        
+
+        <!-- Amazon Whole Foods View -->
+        <div class="table-assets col-md-12" style="border: none;">
+            <div class="col-md-2 pull-left responsive-category"></div>
+            <div class="responsive col-md-9 pull-left">
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+                <div class="responsive-content">Content</div>
+            </div>
+        </div>
+        <div class="table-assets col-md-12" style="border: none;">
+                <div class="col-md-2 pull-left responsive-category"></div>
+                <div class="responsive col-md-9 pull-left">
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                    <div class="responsive-content">Content</div>
+                </div>
+            </div>
+            <div class="table-assets col-md-12" style="border: none;">
+                    <div class="col-md-2 pull-left responsive-category"></div>
+                    <div class="responsive col-md-9 pull-left">
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                        <div class="responsive-content">Content</div>
+                    </div>
+                </div>
+                <div class="table-assets col-md-12" style="border: none;">
+                        <div class="col-md-2 pull-left responsive-category"></div>
+                        <div class="responsive col-md-9 pull-left">
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                            <div class="responsive-content">Content</div>
+                        </div>
+                    </div>
+                    <div class="table-assets col-md-12" style="border: none;">
+                            <div class="col-md-2 pull-left responsive-category"></div>
+                            <div class="responsive col-md-9 pull-left">
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                                <div class="responsive-content">Content</div>
+                            </div>
+                        </div>
+        
+        <!-- Market Table > -->
+        <div class="table-assets col-md-12">
+                <table id="market-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date Added</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Rating</th>
+                            <th>Consultant Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="consultant in Consultants">
+                            <td>{{ consultant.DateCreated }}</td>
+                            <td>{{ consultant.FirstName }}</td>
+                            <td>{{ consultant.LastName }}</td>
+                            <td>{{ consultant.Rating }}</td>
+                            <td>{{ consultant.ConsultantType }}</td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+
+				

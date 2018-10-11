@@ -2,6 +2,7 @@
 
 var MarketController = function ($scope, $routeParams, MarketService) {
 
+    
     // AngularJS - Init
     $scope.init = function () {
         

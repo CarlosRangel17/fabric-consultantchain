@@ -37,6 +37,10 @@ header {
     position: relative;
 }
 
+.dropdown-menu li {
+    padding-left: 10px;
+}
+
 .navbar.navbar-default, #navbar.collapse.navbar-collapse {
     background-color: transparent;
 }
@@ -66,7 +70,8 @@ header {
 
     .navbar ul.nav.navbar-nav li {
         margin: 0;
-        padding: 0 5px;
+        padding: 0;
+        cursor: pointer;
     }
 
         .navbar ul.nav.navbar-nav li:first-child {

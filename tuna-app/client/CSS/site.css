@@ -48,3 +48,7 @@ header{
     margin-top: 125px;
     padding: 50px;
   }
+
+  .app-blue{
+    color: rgba(0,112,173, 1);
+  }
