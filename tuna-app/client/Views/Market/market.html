@@ -29,80 +29,207 @@
 
         <!-- Amazon Whole Foods View -->
         <div class="table-assets col-md-12" style="border: none;">
-            <div class="responsive-category col-md-2 pull-left "></div>
+            <div class="responsive-category col-md-2 pull-left ">
+                <div class="responsive-category-row"><h2>Latest</h2></div>
+                <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-user"></i> </div>
+            </div>
             <div class="responsive col-md-9 pull-left">
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
-                <div class="responsive-content">Content</div>
+                <div class="responsive-content" ng-repeat="consultant in Consultants | orderBy: '-DateCreated'">
+                    <div class="responsive-content-row">
+                        <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                        <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                    </div>
+                    <div class="responsive-content-row avatar">
+                        <div class="col-md-3"></div>
+                        <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                        <div class="col-md-3"></div>
+                        <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                    </div>
+                    <div class="responsive-content-row">
+                        <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                        <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="table-assets col-md-12" style="border: none;">
-                <div class="col-md-2 pull-left responsive-category"></div>
+                <div class="col-md-2 pull-left responsive-category">
+                    <div class="responsive-category-row"><h2>Most Reviewed</h2></div>
+                    <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-list"></i> </div>
+                </div>
                 <div class="responsive col-md-9 pull-left">
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                    <div class="responsive-content">Content</div>
-                </div>
-            </div>
-            <div class="table-assets col-md-12" style="border: none;">
-                    <div class="col-md-2 pull-left responsive-category"></div>
-                    <div class="responsive col-md-9 pull-left">
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                        <div class="responsive-content">Content</div>
-                    </div>
-                </div>
-                <div class="table-assets col-md-12" style="border: none;">
-                        <div class="col-md-2 pull-left responsive-category"></div>
-                        <div class="responsive col-md-9 pull-left">
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                            <div class="responsive-content">Content</div>
-                        </div>
-                    </div>
-                    <div class="table-assets col-md-12" style="border: none;">
-                            <div class="col-md-2 pull-left responsive-category"></div>
-                            <div class="responsive col-md-9 pull-left">
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
-                                <div class="responsive-content">Content</div>
+                        <div class="responsive-content" ng-repeat="consultant in Consultants | orderBy: '-ConsultantLevel'">
+                            <div class="responsive-content-row">
+                                <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                            </div>
+                            <div class="responsive-content-row avatar">
+                                <div class="col-md-3"></div>
+                                <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                <div class="col-md-3"></div>
+                                <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                            </div>
+                            <div class="responsive-content-row">
+                                <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
                             </div>
                         </div>
+                    </div>
+            </div>
+            <div class="table-assets col-md-12" style="border: none;">
+                    <div class="col-md-2 pull-left responsive-category">
+                        <div class="responsive-category-row"><h2>Business Analyst (BA) </h2></div>
+                        <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-stats"></i> </div>
+                    </div>
+                    <div class="responsive col-md-9 pull-left">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'BA'}:true">
+                                <div class="responsive-content-row">
+                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="responsive-content-row avatar">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="responsive-content-row">
+                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                </div>
+                            </div>
+                            <div class="responsive-content"></div>
+                            <div class="responsive-content"></div>
+                        </div>
+                </div>
+                <div class="table-assets col-md-12" style="border: none;">
+                    <div class="col-md-2 pull-left responsive-category">
+                        <div class="responsive-category-row"><h2>Business Intelligence (BI) </h2></div>
+                        <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-tasks"></i> </div>
+                    </div>
+                    <div class="responsive col-md-9 pull-left">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'BI'}:true">
+                                <div class="responsive-content-row">
+                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="responsive-content-row avatar">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="responsive-content-row">
+                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                </div>
+                            </div>
+                            <div class="responsive-content"></div>
+                            <div class="responsive-content"></div>
+                        </div>
+                </div>
+                <div class="table-assets col-md-12" style="border: none;">
+                    <div class="col-md-2 pull-left responsive-category">
+                        <div class="responsive-category-row"><h2>Blockchain </h2></div>
+                        <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-link"></i> </div>
+                    </div>
+                    <div class="responsive col-md-9 pull-left">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Blockchain'}:true">
+                                <div class="responsive-content-row">
+                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="responsive-content-row avatar">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="responsive-content-row">
+                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                </div>
+                            </div>
+                            <div class="responsive-content"></div>
+                            <div class="responsive-content"></div>
+                        </div>
+                </div>
+                <div class="table-assets col-md-12" style="border: none;">
+                        <div class="col-md-2 pull-left responsive-category">
+                            <div class="responsive-category-row"><h2>Cloud </h2></div>
+                            <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-cloud"></i> </div>
+                        </div>
+                        <div class="responsive col-md-9 pull-left">
+                                <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Cloud'}:true">
+                                    <div class="responsive-content-row">
+                                        <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                        <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                    </div>
+                                    <div class="responsive-content-row avatar">
+                                        <div class="col-md-3"></div>
+                                        <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                        <div class="col-md-3"></div>
+                                        <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                    </div>
+                                    <div class="responsive-content-row">
+                                        <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                        <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                    </div>
+                                </div>
+                                <div class="responsive-content"></div>
+                            </div>
+                    </div>
+                <div class="table-assets col-md-12" style="border: none;">
+                    <div class="col-md-2 pull-left responsive-category">
+                        <div class="responsive-category-row"><h2>Mobile </h2></div>
+                        <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-phone"></i> </div>
+                    </div>
+                    <div class="responsive col-md-9 pull-left">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Mobile'}:true">
+                                <div class="responsive-content-row">
+                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="responsive-content-row avatar">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="responsive-content-row">
+                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                </div>
+                            </div>
+                            <div class="responsive-content"></div>
+                            <div class="responsive-content"></div>
+                        </div>
+                </div>
+                <div class="table-assets col-md-12" style="border: none;">
+                    <div class="col-md-2 pull-left responsive-category">
+                        <div class="responsive-category-row"><h2>Web </h2></div>
+                        <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-globe"></i> </div>
+                    </div>
+                    <div class="responsive col-md-9 pull-left">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Web'}:true">
+                                <div class="responsive-content-row">
+                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
+                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="responsive-content-row avatar">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="responsive-content-row">
+                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                </div>
+                            </div>
+                            <div class="responsive-content"></div>
+                        </div>
+                </div>
         
         <!-- Market Table > -->
         <div class="table-assets col-md-12">
@@ -122,7 +249,7 @@
                             <td>{{ consultant.FirstName }}</td>
                             <td>{{ consultant.LastName }}</td>
                             <td>{{ consultant.Rating }}</td>
-                            <td>{{ consultant.ConsultantType }}</td>                           
+                            <td>{{ consultant.ConsultantType | devType }}</td>                           
                         </tr>
                     </tbody>
                 </table>

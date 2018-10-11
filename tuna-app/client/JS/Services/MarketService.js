@@ -7,53 +7,76 @@ App.factory('MarketService', function ($http, SharedService) {
 
     var consultants = [
         {
-            DateCreated: '4/24/2017',
+            DateCreated: '2017-04-24',
             FirstName: 'Carlos',
             LastName: 'Rangel',
             Rating: 'Advanced',
-            ConsultantType: 'Blockchain Developer',
+            ConsultantType: 'Blockchain',
+            AvatarUrl: 'carlos.jpg',
+            ConsultantLevel: '3'
         },
         {
-            DateCreated: '5/7/2017',
+            DateCreated: '2017-05-07',
             FirstName: 'Keyurkumar',
             LastName: 'Patel',
             Rating: 'Advanced',
-            ConsultantType: 'Business Intelligence (BI) Developer',
+            ConsultantType: 'BI',
+            AvatarUrl: 'keyur.jpeg',
+            ConsultantLevel: '3'
         },
         {
-            DateCreated: '5/7/2017',
+            DateCreated: '2017-05-07',
             FirstName: 'Puneet',
             LastName: 'Mittal',
             Rating: 'Advanced',
-            ConsultantType: 'Cloud Developer',
+            ConsultantType: 'Cloud',
+            AvatarUrl: 'puneet.jpg',
+            ConsultantLevel: '3'
         },
         {
-            DateCreated: '9/24/2015',
+            DateCreated: '2015-09-24',
             FirstName: 'Aval',
             LastName: 'Pandya',
             Rating: 'Expert',
-            ConsultantType: 'Business Analyst (BA) Developer'
+            ConsultantType: 'BA',
+            AvatarUrl: 'aval.jpeg',
+            ConsultantLevel: '4'
         },
         {
-            DateCreated: '1/20/2015',
+            DateCreated: '2015-01-20',
             FirstName: 'Hines',
             LastName: 'Vaughan',
             Rating: 'Expert',
-            ConsultantType: 'Mobile Developer',
+            ConsultantType: 'Mobile',
+            AvatarUrl: 'hines.jpeg',
+            ConsultantLevel: '3'
         },
         {
-            DateCreated: '3/24/2017',
-            FirstName: 'Trevor',
-            LastName: 'Ferguson',
-            Rating: 'Advanced',
-            ConsultantType: 'Web Developer',
+            DateCreated: '2018-06-24',
+            FirstName: 'Brandon',
+            LastName: 'Timmons',
+            Rating: 'Intermediate',
+            ConsultantType: 'Web',
+            AvatarUrl: 'timmons.jpeg',
+            ConsultantLevel: '2'
         },
         {
-            DateCreated: '3/24/2017',
+            DateCreated: '2017-03-24',
             FirstName: 'Peter',
             LastName: 'Menh',
             Rating: 'Advanced',
-            ConsultantType: 'Web Developer',
+            ConsultantType: 'Web',
+            AvatarUrl: 'peter.jpeg',
+            ConsultantLevel: '3'
+        },
+        {
+            DateCreated: '2014-06-01',
+            FirstName: 'Mark',
+            LastName: 'Salinas',
+            Rating: 'Expert',
+            ConsultantType: 'Cloud',
+            AvatarUrl: 'mark.jpeg',
+            ConsultantLevel: '4'
         }
     ];
 
@@ -87,13 +110,15 @@ App.factory('MarketService', function ($http, SharedService) {
         // SharedService.GetData('/get_all_tuna', null, SharedService.ToSuccessFunctionModel(success), failFunctions);
         $scope.Consultants = consultants;
 
-        $(document).ready(function() { 
-            $('.responsive').slick({
-                infinite: false,
-                slidesToShow: 3,
-                slidesToScroll: 3
-              });
-        });
+        setTimeout(function(){
+            $(document).ready(function() { 
+                $('.responsive').slick({
+                    infinite: false,
+                    slidesToShow: 3,
+                    slidesToScroll: 3
+                  });
+            });
+        }, 1000);
     }
 
     // Method(s)
