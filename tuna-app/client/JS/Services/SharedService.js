@@ -45,6 +45,8 @@ App.factory('SharedService', function ($http) {
             params: parameters,
             headers: { "Content-Type": "application/json" }
         }).then(function successCallback(response) {
+            console.log('started from the bottom');
+            console.log(response);
             if (response.data.success) {
                 SuccessHandling(successFunctions, response.data);
             } else {

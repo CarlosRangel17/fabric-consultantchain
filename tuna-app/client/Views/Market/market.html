@@ -2,8 +2,8 @@
 
 <link href="../../CSS/market.css" rel="stylesheet">  
 
-<div class="container" ng-init="init()">
-    <h1 class="app-blue">Market</h2>
+<div class="container app-blue" ng-init="init()">
+    <h1 >Market</h2>
     <div class="row">
                <!-- Table Search -->
                <div class="table-search col-md-12">
@@ -36,18 +36,23 @@
             <div class="responsive col-md-9 pull-left">
                 <div class="responsive-content" ng-repeat="consultant in Consultants | orderBy: '-DateCreated'">
                     <div class="responsive-content-row">
-                        <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                        <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                        <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                        <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                     </div>
                     <div class="responsive-content-row avatar">
                         <div class="col-md-3"></div>
-                        <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                        <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                         <div class="col-md-3"></div>
                         <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                     </div>
                     <div class="responsive-content-row">
-                        <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                        <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                        <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                        <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                            ${{ consultant.RatePerHour }}/hr
+                        </button>
+                        <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}" >
+                            Request
+                        </button>
                     </div>
                 </div>
             </div>
@@ -60,18 +65,21 @@
                 <div class="responsive col-md-9 pull-left">
                         <div class="responsive-content" ng-repeat="consultant in Consultants | orderBy: '-ConsultantLevel'">
                             <div class="responsive-content-row">
-                                <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                             </div>
                             <div class="responsive-content-row avatar">
                                 <div class="col-md-3"></div>
-                                <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                 <div class="col-md-3"></div>
                                 <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                             </div>
                             <div class="responsive-content-row">
-                                <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                    ${{ consultant.RatePerHour }}/hr
+                                </button>
+                                <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                             </div>
                         </div>
                     </div>
@@ -82,20 +90,23 @@
                         <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-stats"></i> </div>
                     </div>
                     <div class="responsive col-md-9 pull-left">
-                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'BA'}:true">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{SkillType:'BA'}:true">
                                 <div class="responsive-content-row">
-                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                                 </div>
                                 <div class="responsive-content-row avatar">
                                     <div class="col-md-3"></div>
-                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                     <div class="col-md-3"></div>
                                     <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                                 </div>
                                 <div class="responsive-content-row">
-                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                                 </div>
                             </div>
                             <div class="responsive-content"></div>
@@ -108,20 +119,23 @@
                         <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-tasks"></i> </div>
                     </div>
                     <div class="responsive col-md-9 pull-left">
-                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'BI'}:true">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{SkillType:'BI'}:true">
                                 <div class="responsive-content-row">
-                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                                 </div>
                                 <div class="responsive-content-row avatar">
                                     <div class="col-md-3"></div>
-                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                     <div class="col-md-3"></div>
                                     <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                                 </div>
                                 <div class="responsive-content-row">
-                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                                 </div>
                             </div>
                             <div class="responsive-content"></div>
@@ -134,20 +148,23 @@
                         <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-link"></i> </div>
                     </div>
                     <div class="responsive col-md-9 pull-left">
-                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Blockchain'}:true">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{SkillType:'Blockchain'}:true">
                                 <div class="responsive-content-row">
-                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                                 </div>
                                 <div class="responsive-content-row avatar">
                                     <div class="col-md-3"></div>
-                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                     <div class="col-md-3"></div>
                                     <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                                 </div>
                                 <div class="responsive-content-row">
-                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                                 </div>
                             </div>
                             <div class="responsive-content"></div>
@@ -160,20 +177,23 @@
                             <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-cloud"></i> </div>
                         </div>
                         <div class="responsive col-md-9 pull-left">
-                                <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Cloud'}:true">
+                                <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{SkillType:'Cloud'}:true">
                                     <div class="responsive-content-row">
-                                        <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                        <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                        <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                        <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                                     </div>
                                     <div class="responsive-content-row avatar">
                                         <div class="col-md-3"></div>
-                                        <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                        <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                         <div class="col-md-3"></div>
                                         <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                                     </div>
                                     <div class="responsive-content-row">
-                                        <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                        <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                        <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                        <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                            ${{ consultant.RatePerHour }}/hr
+                                        </button>
+                                        <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                                     </div>
                                 </div>
                                 <div class="responsive-content"></div>
@@ -185,20 +205,23 @@
                         <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-phone"></i> </div>
                     </div>
                     <div class="responsive col-md-9 pull-left">
-                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Mobile'}:true">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{SkillType:'Mobile'}:true">
                                 <div class="responsive-content-row">
-                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                                 </div>
                                 <div class="responsive-content-row avatar">
                                     <div class="col-md-3"></div>
-                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                     <div class="col-md-3"></div>
                                     <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                                 </div>
                                 <div class="responsive-content-row">
-                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                                 </div>
                             </div>
                             <div class="responsive-content"></div>
@@ -211,20 +234,23 @@
                         <div class="responsive-category-row-icon"><i class="glyphicon glyphicon-globe"></i> </div>
                     </div>
                     <div class="responsive col-md-9 pull-left">
-                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{ConsultantType:'Web'}:true">
+                            <div class="responsive-content" ng-repeat="consultant in Consultants | filter:{SkillType:'Web'}:true">
                                 <div class="responsive-content-row">
-                                    <i class="glyphicon pull-left col-md-4 {{ consultant.ConsultantType | iconType }}"></i>
-                                    <span class="pull-right col-md-4"> {{ consultant.DateCreated }} </span>
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
                                 </div>
                                 <div class="responsive-content-row avatar">
                                     <div class="col-md-3"></div>
-                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarUrl}}" alt="Consultant">
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
                                     <div class="col-md-3"></div>
                                     <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
                                 </div>
                                 <div class="responsive-content-row">
-                                    <img class="pull-left col-md-4" src="../../Images/sogeti-logo.png" alt="">
-                                    <button class="pull-right col-md-4 btn btn-primary" data-id="{{consultant.Id}}">Request</button>
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-warning" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}">Request</button>
                                 </div>
                             </div>
                             <div class="responsive-content"></div>
@@ -248,8 +274,8 @@
                             <td>{{ consultant.DateCreated }}</td>
                             <td>{{ consultant.FirstName }}</td>
                             <td>{{ consultant.LastName }}</td>
-                            <td>{{ consultant.Rating }}</td>
-                            <td>{{ consultant.ConsultantType | devType }}</td>                           
+                            <td>{{ consultant.SkillLevel | devLevel }}</td>
+                            <td>{{ consultant.SkillType | devType }}</td>                           
                         </tr>
                     </tbody>
                 </table>
@@ -257,4 +283,15 @@
     </div>
 </div>
 
-				
+<!-- Modal -->
+<modal name="request-consultant"></modal>
+
+  <!-- 
+      TODO: Implement Request Process
+            - Style Modal (boot box)
+            -  
+      TODO: Add "Create SOW" Smart Contract method 
+      TODO: Fix filter(s) on page
+            - Select list on-change must show the proper category or cateogories (All) 
+            - Search list must show available people within categories? 
+   -->

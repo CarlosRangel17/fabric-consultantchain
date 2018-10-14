@@ -1,5 +1,22 @@
 'use strict'
 
+App.filter('devLevel', function(){
+    return function(type){
+        switch(type){
+            case '1':
+                return "Beginner";
+            case '2':
+                return "Intermediate";
+            case '3':
+                return "Advanced";
+            case '4':
+                return "Expert";
+            default:
+                return '';
+        }
+    }
+});
+
 App.filter('devType', function(){
     return function(type){
         switch(type){

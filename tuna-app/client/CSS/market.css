@@ -62,6 +62,7 @@
     .responsive .responsive-content{
         height: 250px;
         width: 250px;
+        max-width: 250px;
         border: 1px solid #333;
         margin-left: -1px;
     }
@@ -84,7 +85,7 @@
     .responsive-category .responsive-category-row-icon i {
         text-align: center;
         font-size: 75px;
-        color: #0070AD;
+        /* color: #0070AD; */
         display: inline-block;
         width: 100%;
     }
@@ -108,9 +109,20 @@
     font-size: 20px;
 }
 
+.responsive-content .responsive-content-row span {
+    padding: 0px;
+}
+
+.responsive-content .responsive-content-row button {
+    margin-right: 15px
+}
+
 .slick-prev:before,
 .slick-next:before
 {
     color: #0070AD;
 }
 
+.request-btn {
+    padding-right: 75px;
+}

@@ -1,3 +1,7 @@
+.menu_bar{
+    float: right;
+}
+
 /*============
 	header
 ===================*/
@@ -186,7 +190,7 @@ nav.fill ul li a {
         width: 100%;
         height: 100%;
         background: #0070AD;
-        border-radius: 5px;
+        /* border-radius: 5px; */
     }
 }
 

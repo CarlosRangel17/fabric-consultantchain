@@ -19,25 +19,29 @@ var os            = require('os');
 
 module.exports = (function() {
 return{
-	get_all_tuna: function(req, res){
-		console.log("getting all tuna from database: ");
+	get_all_consultants: function(req, res){
+		console.log("getting all consultants from database: ");
 
 		var fabric_client = new Fabric_Client();
 
-		// setup the fabric network
+        // ******* setup the fabric network *******  
+        // Add Channel
 		var channel = fabric_client.newChannel('mychannel');
+        // Add Peer
 		var peer = fabric_client.newPeer('grpc://localhost:7051');
 		channel.addPeer(peer);
-
-		//
+        // No need for Orderer since we're only querying (Reading) the Blockchain 
+        
+        // Initialize member user + hfc key store path  
 		var member_user = null;
 		var store_path = path.join(os.homedir(), '.hfc-key-store');
-		console.log('Store path:'+store_path);
+		console.log('Store path:' + store_path);
 		var tx_id = null;
 
 		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
 		Fabric_Client.newDefaultKeyValueStore({ path: store_path
 		}).then((state_store) => {
+
 		    // assign the store to the fabric client
 		    fabric_client.setStateStore(state_store);
 		    var crypto_suite = Fabric_Client.newCryptoSuite();
@@ -50,6 +54,8 @@ return{
 		    // get the enrolled user from persistence, this user will sign all requests
 		    return fabric_client.getUserContext('user1', true);
 		}).then((user_from_store) => {
+
+            // Check if user is enrolled 
 		    if (user_from_store && user_from_store.isEnrolled()) {
 		        console.log('Successfully loaded user1 from persistence');
 		        member_user = user_from_store;
@@ -57,11 +63,11 @@ return{
 		        throw new Error('Failed to get user1.... run registerUser.js');
 		    }
 
-		    // queryAllTuna - requires no arguments , ex: args: [''],
+		    // queryAllConsultants - requires no arguments , ex: args: [''],
 		    const request = {
-		        chaincodeId: 'tuna-app',
+		        chaincodeId: 'consultant-app',
 		        txId: tx_id,
-		        fcn: 'queryAllTuna',
+		        fcn: 'queryAllConsultants',
 		        args: ['']
 		    };
 
@@ -69,12 +75,12 @@ return{
 		    return channel.queryByChaincode(request);
 		}).then((query_responses) => {
 		    console.log("Query has completed, checking results");
-		    // query_responses could have more than one  results if there multiple peers were used as targets
+		    // query_responses could have more than one results if there multiple peers were used as targets
 		    if (query_responses && query_responses.length == 1) {
 		        if (query_responses[0] instanceof Error) {
 		            console.error("error from query = ", query_responses[0]);
 		        } else {
-		            console.log("Response is ", query_responses[0].toString());
+					console.log("Response is ", query_responses[0].toString());
 		            res.json(JSON.parse(query_responses[0].toString()));
 		        }
 		    } else {
@@ -84,25 +90,34 @@ return{
 		    console.error('Failed to query successfully :: ' + err);
 		});
 	},
-	add_tuna: function(req, res){
-		console.log("submit recording of a tuna catch: ");
+	add_consultant: function(req, res){
+		console.log("submit recording of a consultant addition: ");
 
-		var array = req.params.tuna.split("-");
+        // params come across as a '-' deliminated string 
+		var array = req.params.consultant.split("-");
 		console.log(array);
 
-		var key = array[0]
-		var timestamp = array[2]
-		var location = array[1]
-		var vessel = array[4]
-		var holder = array[3]
-
+        // Retrieve consultant params 
+        var consultant = {
+            Id: array[0],
+            DateCreated: array[1],
+            FirstName: array[2],
+            LastName: array[3],
+            RatePerHour: array[4],
+            Title: array[5],
+            SkillType: array[6],
+            SkillLevel: array[7]
+        };
 
 		var fabric_client = new Fabric_Client();
 
-		// setup the fabric network
-		var channel = fabric_client.newChannel('mychannel');
-		var peer = fabric_client.newPeer('grpc://localhost:7051');
-		channel.addPeer(peer);
+		// ******* setup the fabric network *******  
+        // Add Channel
+        var channel = fabric_client.newChannel('mychannel');
+        // Add Peer 
+        var peer = fabric_client.newPeer('grpc://localhost:7051');
+        channel.addPeer(peer);
+        // Add Orderer 
 		var order = fabric_client.newOrderer('grpc://localhost:7050')
 		channel.addOrderer(order);
 
@@ -110,6 +125,7 @@ return{
 		var store_path = path.join(os.homedir(), '.hfc-key-store');
 		console.log('Store path:'+store_path);
 		var tx_id = null;
+		// ******* end setup *******  
 
 		// create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
 		Fabric_Client.newDefaultKeyValueStore({ path: store_path
@@ -137,13 +153,26 @@ return{
 		    tx_id = fabric_client.newTransactionID();
 		    console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
-		    // recordTuna - requires 5 args, ID, vessel, location, timestamp,holder - ex: args: ['10', 'Hound', '-12.021, 28.012', '1504054225', 'Hansel'], 
-		    // send proposal to endorser
+            // recordConsultant - requires 8 args: ID, Date Created, First Name, Last name, RatePerHour, Title, Skill Type, Skill Level
+            // - ex: args: ['10', '2018-04-24', 'Carlos', 'Rangel', '80', 'Consultant', 'Blockchain', '3'], 
+            var argList = [
+                consultant.Id,
+                consultant.DateCreated,
+                consultant.FirstName,
+                consultant.LastName,
+                consultant.RatePerHour,
+                consultant.Title,
+                consultant.SkillType,
+                consultant.SkillLevel
+            ];
+
+            // recordConsultant - requires 
+            // send proposal to endorser
 		    const request = {
 		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'tuna-app',
-		        fcn: 'recordTuna',
-		        args: [key, vessel, location, timestamp, holder],
+		        chaincodeId: 'consultant-app',
+		        fcn: 'recordConsultant',
+		        args: argList,
 		        chainId: 'mychannel',
 		        txId: tx_id
 		    };
@@ -243,7 +272,7 @@ return{
 		    console.error('Failed to invoke successfully :: ' + err);
 		});
 	},
-	get_tuna: function(req, res){
+	get_consultant: function(req, res){
 
 		var fabric_client = new Fabric_Client();
 		var key = req.params.id
@@ -281,11 +310,12 @@ return{
 		        throw new Error('Failed to get user1.... run registerUser.js');
 		    }
 
-		    // queryTuna - requires 1 argument, ex: args: ['4'],
+            // getConsultant - requires 1 argument: the ID
+            // ex: args: ['10'],
 		    const request = {
-		        chaincodeId: 'tuna-app',
+		        chaincodeId: 'consultant-app',
 		        txId: tx_id,
-		        fcn: 'queryTuna',
+		        fcn: 'queryConsultant',
 		        args: [key]
 		    };
 
@@ -297,7 +327,7 @@ return{
 		    if (query_responses && query_responses.length == 1) {
 		        if (query_responses[0] instanceof Error) {
 		            console.error("error from query = ", query_responses[0]);
-		            res.send("Could not locate tuna")
+		            res.send("Could not locate consultant")
 		            
 		        } else {
 		            console.log("Response is ", query_responses[0].toString());
@@ -305,19 +335,21 @@ return{
 		        }
 		    } else {
 		        console.log("No payloads were returned from query");
-		        res.send("Could not locate tuna")
+		        res.send("Could not locate consultant")
 		    }
 		}).catch((err) => {
 		    console.error('Failed to query successfully :: ' + err);
-		    res.send("Could not locate tuna")
+		    res.send("Could not locate consultant")
 		});
 	},
 	change_holder: function(req, res){
-		console.log("changing holder of tuna catch: ");
+		console.log("changing holder of consultant catch: ");
 
 		var array = req.params.holder.split("-");
-		var key = array[0]
-		var holder = array[1];
+        var holder = {
+            ConsultantId: array[0],
+            HolderId: array[1]
+        };
 
 		var fabric_client = new Fabric_Client();
 
@@ -359,13 +391,13 @@ return{
 		    tx_id = fabric_client.newTransactionID();
 		    console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
-		    // changeTunaHolder - requires 2 args , ex: args: ['1', 'Barry'],
+		    // changeConsultantHolder - requires 2 args , ex: args: ['10', '1'],
 		    // send proposal to endorser
 		    var request = {
 		        //targets : --- letting this default to the peers assigned to the channel
-		        chaincodeId: 'tuna-app',
-		        fcn: 'changeTunaHolder',
-		        args: [key, holder],
+		        chaincodeId: 'consultant-app',
+		        fcn: 'changeConsultantHolder',
+		        args: [holder.ConsultantId, holder.HolderId],
 		        chainId: 'mychannel',
 		        txId: tx_id
 		    };
@@ -443,7 +475,7 @@ return{
 		        return Promise.all(promises);
 		    } else {
 		        console.error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
-		        res.send("Error: no tuna catch found");
+		        res.send("Error: no consultant found");
 		        // throw new Error('Failed to send Proposal or receive valid response. Response null or status is not 200. exiting...');
 		    }
 		}).then((results) => {
@@ -454,7 +486,7 @@ return{
 		        res.json(tx_id.getTransactionID())
 		    } else {
 		        console.error('Failed to order the transaction. Error code: ' + response.status);
-		        res.send("Error: no tuna catch found");
+		        res.send("Error: no consultant found");
 		    }
 
 		    if(results && results[1] && results[1].event_status === 'VALID') {
@@ -465,7 +497,7 @@ return{
 		    }
 		}).catch((err) => {
 		    console.error('Failed to invoke successfully :: ' + err);
-		    res.send("Error: no tuna catch found");
+		    res.send("Error: no consultant found");
 		});
 
 	}

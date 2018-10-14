@@ -13,9 +13,9 @@ header{
     margin-left:3%;
     margin-right:3%;
   }
-  .form-control{
+  /* .form-control{
     margin: 8px;
-  }
+  } */
   #right_header{
     width:20%;
     font-size:15px;
@@ -52,3 +52,66 @@ header{
   .app-blue{
     color: rgba(0,112,173, 1);
   }
+
+  .app-blue-bg{
+    background-color: rgba(0,112,173, 1);
+    color: #fff;
+  }
+
+  .app-green { 
+    color: rgba(96,199,96, 1);
+  }
+
+  .app-yellow {
+    color: (252, 190, 27, 1);
+  }
+
+.modal {
+    opacity: 999;
+  }
+
+  .modal .modal-lg {
+    margin-top: 200px;
+  }
+
+  .modal-backdrop.show {
+    opacity: .5 !important;
+}
+
+.tab-content .tab-pane{
+    border: 5px solid rgba(0,112,173, 1);
+    padding: 15px;
+  }
+
+.md-form textarea{
+  border: 1px solid #ced4da;
+}
+
+.tab-content .tab-pane form .form-group-textarea {
+  width: 100%;
+}
+
+.tab-content .tab-pane form .form-group-textarea textarea{
+  max-height: 100px;
+}
+
+.tab-content .tab-pane form .form-check .form-check-label{
+  margin-left: 20px;
+}
+
+.md-form.pull-left,
+.md-form.pull-right {
+  padding: 5px
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover{
+  background-color:#004e79;
+  color: #fff;
+  border: none;
+}
+
+.requirements,
+.requirements input{
+  width: 100%;
+}
