@@ -39,11 +39,28 @@ type Consultant struct {
 	ClientId    string `json:"ClientId"`
 }
 
+type SOW struct {
+	DateCreated     string `json:"DateCreated"`
+	TermStartDate   string `json:"TermStartDate"`
+	TermEndDate     string `json:"TermEndDate"`
+	RequireFullTime string `json:"RequireFullTime"`
+	RatePerHour     string `json:"RatePerHour"`
+	Status          string `json:"Status"`
+	ClientId        string `json:"ClientId"`
+	Name            string `json:"Name"`
+	ConsultantId    string `json:"ConsultantId"`
+	SOWId           string `json:"SOWId"`
+	Description     string `json:"Description"`
+	Requirement1    string `json:"Requirement1"`
+	Requirement2    string `json:"Requirement2"`
+	Requirement3    string `json:"Requirement3"`
+}
+
 func Seed() []Consultant {
 	seedList := []Consultant{
-		{DateCreated: "2017-04-24", FirstName: "Carlos", LastName: "Rangel", AvatarImage: "carlos.jpg", Title: "Consultant", RatePerHour: "20", SkillType: "Blockchain", SkillLevel: "3", Skill1: "Ethereum", Skill2: "", Skill3: "", ClientId: ""},
-		{DateCreated: "2017-05-07", FirstName: "Keyurkumar", LastName: "Patel", AvatarImage: "keyur.jpeg", Title: "Consultant", RatePerHour: "20", SkillType: "BI", SkillLevel: "3", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: ""},
-		{DateCreated: "2017-05-07", FirstName: "Puneet", LastName: "Mittal", AvatarImage: "puneet.jpg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Cloud", SkillLevel: "3", Skill1: "Azure", Skill2: "", Skill3: "", ClientId: ""},
+		{DateCreated: "2017-04-24", FirstName: "Carlos", LastName: "Rangel", AvatarImage: "carlos.jpg", Title: "Consultant", RatePerHour: "20", SkillType: "Blockchain", SkillLevel: "3", Skill1: "Ethereum", Skill2: "", Skill3: "", ClientId: "1"},
+		{DateCreated: "2017-05-07", FirstName: "Keyurkumar", LastName: "Patel", AvatarImage: "keyur.jpeg", Title: "Consultant", RatePerHour: "20", SkillType: "BI", SkillLevel: "3", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: "1"},
+		{DateCreated: "2017-05-07", FirstName: "Puneet", LastName: "Mittal", AvatarImage: "puneet.jpg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Cloud", SkillLevel: "3", Skill1: "Azure", Skill2: "", Skill3: "", ClientId: "1"},
 		{DateCreated: "2015-09-24", FirstName: "Aval", LastName: "Pandya", AvatarImage: "aval.jpeg", Title: "Manager", RatePerHour: "30", SkillType: "BA", SkillLevel: "4", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: ""},
 		{DateCreated: "2015-01-20", FirstName: "Hines", LastName: "Vaughan", AvatarImage: "hines.jpeg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Mobile", SkillLevel: "4", Skill1: "Xamarin", Skill2: "", Skill3: "", ClientId: ""},
 		{DateCreated: "2018-06-24", FirstName: "Brandon", LastName: "Timmons", AvatarImage: "timmons.jpeg", Title: "Associate Consultant", RatePerHour: "15", SkillType: "Web", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
@@ -113,7 +130,7 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 // - param(s): id string, dateCreated string, firstName string, lastName string, title string, skillLevel string, skillType string, skill1 string, skill2 string, skill3 string, clientId string
 func (s *SmartContract) recordConsultant(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
-	if len(args) != 12 {
+	if len(args) != 13 {
 		return shim.Error("Incorrect number of arguments. Expected 12")
 	}
 
@@ -121,14 +138,15 @@ func (s *SmartContract) recordConsultant(APIstub shim.ChaincodeStubInterface, ar
 		DateCreated: args[1],
 		FirstName:   args[2],
 		LastName:    args[3],
-		Title:       args[4],
-		RatePerHour: args[5],
-		SkillType:   args[6],
-		SkillLevel:  args[7],
-		Skill1:      args[8],
-		Skill2:      args[9],
-		Skill3:      args[10],
-		ClientId:    args[11],
+		AvatarImage: args[4],
+		Title:       args[5],
+		RatePerHour: args[6],
+		SkillType:   args[7],
+		SkillLevel:  args[8],
+		Skill1:      args[9],
+		Skill2:      args[10],
+		Skill3:      args[11],
+		ClientId:    args[12],
 	}
 
 	consultantAsBytes, _ := json.Marshal(consultant)
@@ -211,6 +229,41 @@ func (s *SmartContract) changeConsultantHolder(APIstub shim.ChaincodeStubInterfa
 	}
 
 	return shim.Success(nil)
+}
+
+// begin consultant (asset) request from client (buyer)
+// - param(s):
+func (s *SmartContract) requestConsultant(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
+
+	if len(args) != 14 {
+		return shim.Error("Incorrect number of arguments. Expecting 14")
+	}
+
+	var sow = SOW{
+		DateCreated:     args[1],
+		TermStartDate:   args[2],
+		TermEndDate:     args[3],
+		RequireFullTime: args[4],
+		RatePerHour:     args[5],
+		Status:          args[6],
+		ClientId:        args[7],
+		Name:            args[8],
+		ConsultantId:    args[9],
+		SOWId:           args[10], // Parent SOW
+		Description:     args[11],
+		Requirement1:    args[12],
+		Requirement2:    args[13],
+		Requirement3:    args[14],
+	}
+
+	sowAsBytes, _ := json.Marshal(sow)
+	err := APIstub.PutState(args[0], sowAsBytes)
+
+	if err != nil {
+		return shim.Error(fmt.Sprintf("Failed to record consultant: %s", args[0]))
+	}
+
+	return shim.Success(sowAsBytes)
 }
 
 // main function starts up the chaincode in the container during instantiate

@@ -1,0 +1,38 @@
+.consultant-box {
+    height: 250px;
+    width: 250px;
+    max-width: 250px;
+    border: 1px solid #333;
+    /* margin-left: -1px; */
+
+    padding: 5px;
+    background: #fff;
+}
+
+.consultant-box div {
+    height: 20%;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.consultant-box .consultant-body.avatar {
+    height: 50%;
+    padding: 0px;
+}
+
+.consultant-box .consultant-body img,
+.consultant-box .consultant-footer img{
+    align-content: center;  
+}
+
+.consultant-box div i {
+font-size: 20px;
+}
+
+.consultant-box div span {
+padding: 0px;
+}
+
+.consultant-box div button {
+margin-right: 15px
+}

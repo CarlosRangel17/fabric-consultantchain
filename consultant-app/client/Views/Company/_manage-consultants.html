@@ -1,0 +1,199 @@
+<div class="col-md-3">
+        <div class="panel-heading">
+            Filter Consultants
+        </div>
+        <ul class="nav md-pills pills-primary flex-column nav-list-options" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" data-target="#allConsultantsTab" role="tab">All
+                <!-- <i class="fa fa-download ml-2"></i> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" data-target="#consultantLatestTab" role="tab">Latest
+                <!-- <i class="fa fa-file-text ml-2"></i> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" data-target="#atoTab" role="tab">ATO
+                <!-- <i class="fa fa-address-card ml-2"></i> -->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="nav-link" data-toggle="tab" data-target="#billableTab">Billable</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <!-- Tab panels -->
+        <div class="tab-content vertical">
+            <!--Panel 1-->
+            <div class="tab-pane fade in show active" id="allConsultantsTab" role="tabpanel">
+
+                    <div class="panel-heading">
+                            All Consultants
+                            <span class="header-add-info" ng-click="AddConsultant()">
+                                <button class="btn add-btn">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                            </span>
+                    </div>
+                    <div class="panel-body">
+                        <!--Consultant Box-->
+                        <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants">
+                            <span class="pull-right btn btn-warning">
+                                <i class="fa fa-pencil"></i>
+                            </span>
+                            <br>
+                            <div class="consultant-header">
+                                <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
+                            </div>
+                            <div class="consultant-body">
+                                <div class="col-md-3"></div>
+                                <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
+                                <div class="col-md-3"></div>
+                                <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                            </div>
+                            <div class="consultant-footer">
+                                <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-primary" data-id="{{consultant.Id}}" disabled>
+                                    ${{ consultant.RatePerHour }}/hr
+                                </button>
+                                <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}" >
+                                    Request
+                                </button>
+                            </div>
+                        </div>
+                        <!--/.Consultant Box-->
+                    </div>
+            </div>
+            <!--/.Panel 1-->
+
+            <!--Panel 2-->
+            <div class="tab-pane in fade" id="consultantLatestTab" role="tabpanel">
+
+                    <div class="panel-heading">
+                            Latest Consultants
+                            <span class="header-add-info" ng-click="AddConsultant()">
+                                <button class="btn add-btn">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                            </span>
+                    </div>
+                    <div class="panel-body">
+                         <!--Consultant Box-->
+                         <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants | orderBy: '-DateCreated'">
+                                <span class="pull-right btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <br>
+                                <div class="consultant-header">
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="consultant-body">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="consultant-footer">
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-primary" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}" >
+                                        Request
+                                    </button>
+                                </div>
+                            </div>
+                            <!--/.Consultant Box-->
+                    </div>
+            </div>
+            <!--/.Panel 2-->
+            <!--Panel 3-->
+            <div class="tab-pane in fade" id="atoTab" role="tabpanel">
+
+                    <div class="panel-heading">
+                            ATO Consultants
+                            <span class="header-add-info" ng-click="AddConsultant()">
+                                <button class="btn add-btn">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                            </span>
+                    </div>
+                    <div class="panel-body">
+                         <!--Consultant Box-->
+                         <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants | filter:{ClientId:''}:true">
+                                <span class="pull-right btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <br>
+                                <div class="consultant-header">
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="consultant-body">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="consultant-footer">
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-primary" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}" >
+                                        Request
+                                    </button>
+                                </div>
+                            </div>
+                            <!--/.Consultant Box-->
+                    </div>
+            </div>
+            <!--/.Panel 3-->
+             <!--Panel 4-->
+             <div class="tab-pane in fade" id="billableTab" role="tabpanel">
+
+                    <div class="panel-heading">
+                            Billable Consultants
+                            <span class="header-add-info" ng-click="AddConsultant()">
+                                <button class="btn add-btn">
+                                    <span class="fa fa-plus"></span>
+                                </button>
+                            </span>
+                    </div>
+                    <div class="panel-body">
+                         <!--Consultant Box-->
+                         <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants | filter:{ClientId:'!'}:true">
+                                <span class="pull-right btn btn-warning">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <br>
+                                <div class="consultant-header">
+                                    <i class="glyphicon pull-left col-sm-4 col-md-4 {{ consultant.SkillType | iconType }}"></i>
+                                    <span class="pull-right col-sm-4 col-md-4"> {{ consultant.DateCreated }} </span>
+                                </div>
+                                <div class="consultant-body">
+                                    <div class="col-md-3"></div>
+                                    <img class="col-md-6" ng-src="../../Images/{{consultant.AvatarImage}}" alt="Consultant">
+                                    <div class="col-md-3"></div>
+                                    <span class="col-md-12">{{ consultant.FirstName + ' ' + consultant.LastName }}</span>
+                                </div>
+                                <div class="consultant-footer">
+                                    <img class="pull-left col-sm-4 col-md-4" src="../../Images/sogeti-logo.png" alt="">
+                                    <button ng-hide="IsClient()" class="pull-right col-sm-4 col-md-4 btn btn-primary" data-id="{{consultant.Id}}" disabled>
+                                        ${{ consultant.RatePerHour }}/hr
+                                    </button>
+                                    <button ng-show="IsClient()" ng-click="StartRequest(consultant.Id)" class="pull-right col-sm-4 col-md-4 btn btn-success request-btn" data-id="{{consultant.Id}}" >
+                                        Request
+                                    </button>
+                                </div>
+                            </div>
+                            <!--/.Consultant Box-->
+                    </div>
+                </div>
+                <!--/.Panel 4-->
+        </div>
+    </div>

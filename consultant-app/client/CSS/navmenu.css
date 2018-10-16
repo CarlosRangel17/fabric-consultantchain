@@ -1,0 +1,224 @@
+.menu_bar{
+    float: right;
+}
+
+/*============
+	header
+===================*/
+header {
+    background: rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+
+.logo_img{
+    padding: 5px 15px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.logo_img img {
+    width: 100%;
+}
+
+.navbar-fixed-top{
+    background-color: #0070AD;
+}
+
+/*=========
+	menu
+==========*/
+
+.dropdown .dropdown-toggle::after {
+    content: "\f078";
+    font-family: fontawesome;
+    font-size: 10px;
+    font-weight: 400;
+    margin: 0 3px;
+    position: absolute;
+}
+
+.dropdown .dropdown-toggle {
+    position: relative;
+}
+
+.dropdown-menu li {
+    padding-left: 10px;
+}
+
+.navbar.navbar-default, #navbar.collapse.navbar-collapse {
+    background-color: transparent;
+}
+
+
+.navbar {
+    border: 0 solid hsla(0, 0%, 0%, 0);
+    margin-bottom: 0;
+    position: relative;
+}
+
+.collapse.navbar-collapse {
+    background: hsl(0, 0%, 0%) none repeat scroll 0 0;
+    margin: 0 auto;
+    text-align: right;
+}
+
+.navbar ul.nav.navbar-nav {
+    float: none;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px 15px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+    .navbar ul.nav.navbar-nav li {
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+    }
+
+        .navbar ul.nav.navbar-nav li:first-child {
+            border-left: 0px;
+        }
+
+        .navbar ul.nav.navbar-nav li:last-child {
+            border-right: 0px;
+        }
+
+        .navbar ul.nav.navbar-nav li a {
+            color: #0070AD;  /*hsl(0, 0%, 100%); */
+            font-family: "Open Sans",sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            padding-left: 10px;
+            padding-right: 13px;
+            text-transform: uppercase;
+        } 
+            .navbar ul.nav.navbar-nav li a:hover {
+            color: #fff;
+        /*background: transparent;
+                background-color: rgba(237, 86, 84, 1);
+                color: #fff;*/
+                /*rgba(237, 86, 84, 1);*/
+                /*border-bottom: 2px solid rgba(237, 86, 84, 1)*/
+            }
+
+        .navbar ul.nav.navbar-nav li.active a {
+            background-color: #0070AD;
+            color: #fff;
+        }
+
+.navbar-collapse {
+    overflow-x: visible;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+@media (min-width:990px) {
+    .navbar-collapse {
+        display: inline-block;
+    }
+}
+@media(max-width: 990px){
+    #logo {
+        max-width: 100px;
+    }
+}
+
+/* stroke */
+nav.stroke ul li a,
+nav.fill ul li a {
+    position: relative;
+}
+
+    nav.stroke ul li a:after,
+    nav.fill ul li a:after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 0%;
+        content: '.';
+        color: transparent;
+        background: #aaa;
+        height: 1px;
+    }
+
+    nav.stroke ul li a:hover:after {
+        width: 100%;
+    }
+
+nav.fill ul li a {
+    transition: all 2s;
+}
+
+    nav.fill ul li a:after {
+        text-align: left;
+        content: '.';
+        margin: 0;
+        opacity: 0;
+    }
+
+    nav.fill ul li a:hover {
+        color: #fff;
+        z-index: 1;
+    }
+
+        nav.fill ul li a:hover:after {
+            z-index: -10;
+            animation: fill 1s forwards;
+            -webkit-animation: fill 1s forwards;
+            -moz-animation: fill 1s forwards;
+            opacity: 1;
+        }
+
+/* Keyframes */
+@-webkit-keyframes fill {
+    0% {
+        width: 0%;
+        height: 1px;
+    }
+
+    50% {
+        width: 100%;
+        height: 1px;
+    }
+
+    100% {
+        width: 100%;
+        height: 100%;
+        background: #0070AD;
+        /* border-radius: 5px; */
+    }
+}
+
+/* Keyframes */
+@-webkit-keyframes circle {
+    0% {
+        width: 1px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        height: 1px;
+        z-index: -1;
+        background: #eee;
+        border-radius: 100%;
+    }
+
+    100% {
+        background: #aaa;
+        height: 5000%;
+        width: 5000%;
+        z-index: -1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border-radius: 0;
+    }
+}

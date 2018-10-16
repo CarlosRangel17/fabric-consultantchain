@@ -1,0 +1,128 @@
+.search-bar .glyphicon {
+    
+    float: right;
+    margin-top: -40px;
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+}
+
+.search-bar, 
+.filter-box {
+    display: inline-block
+}
+
+.search-bar .form-control,
+.filter-box {
+    -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -o-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    background-color: transparent;
+}
+
+.filter-search {
+    color: steelblue;
+    font-size: 100%;
+    padding-top: 20px;
+}
+
+.filter-box {
+    height: 54px;
+    cursor: pointer;
+}
+
+.table-assets {
+    margin-top: 15px;
+    border: 10px solid #0070AD;
+    padding: 0px;
+}
+
+#asset-search:focus {
+    border-bottom: 1px solid #0070AD;
+}
+
+.responsive,
+.responsive-category{
+    padding: 0px;
+}
+
+    .responsive-category,
+    .responsive .responsive-content{
+        height: 250px;
+        width: 250px;
+        max-width: 250px;
+        border: 1px solid #333;
+        margin-left: -1px;
+    }
+
+    .responsive-category .responsive-category-row {
+        height: 33%;
+        text-align: center;
+        padding-top: 15px;
+    }
+
+    .responsive-category .responsive-category-row h2{
+        padding: 0px 15px;
+    }
+
+    .responsive-category .responsive-category-row-icon {
+        height: 66%;
+        padding-top: 50px;
+    }
+
+    .responsive-category .responsive-category-row-icon i {
+        text-align: center;
+        font-size: 75px;
+        /* color: #0070AD; */
+        display: inline-block;
+        width: 100%;
+    }
+
+    .responsive-content .responsive-content-row {
+        height: 20%;
+        text-align: center;
+        padding-top: 5px;
+    }
+
+    .responsive-content .responsive-content-row.avatar {
+        height: 50%;
+        padding: 0px;
+    }
+
+.responsive-content .responsive-content-row img{
+    align-content: center;
+}
+
+.responsive-content .responsive-content-row i {
+    font-size: 20px;
+}
+
+.responsive-content .responsive-content-row span {
+    padding: 0px;
+}
+
+.responsive-content .responsive-content-row button {
+    margin-right: 15px
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    color: #0070AD;
+}
+
+.request-btn {
+    padding-right: 75px;
+}

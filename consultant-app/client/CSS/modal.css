@@ -1,0 +1,33 @@
+
+.modal {
+  opacity: 999;
+}
+
+.modal .modal-lg,
+.modal .modal-md {
+  margin-top: 200px;
+}
+
+.modal-backdrop.show {
+  opacity: .5 !important;
+}
+
+.modal .modal-full-height{
+top: 212px;
+}
+
+.modal-dialog .modal-content.modal-success .modal-header {
+background-color: #00c851;
+color: #fff;
+}
+
+.modal-body .row div img,
+.modal-body .consultant-content img {
+  width: 100%;
+}
+
+#addConsultantModal .modal-dialog .modal-content .modal-header {
+  background-color: rgba(0,112,173, 1);
+  color: #fff;
+  text-align: center
+}
