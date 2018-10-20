@@ -5,31 +5,68 @@ App.factory('CompanyService', function ($http, BlockchainService, SharedService)
     // Set Global Var(s)
     var $appScope = null;
 
-    var success = function (data) {
+    var queryAllConsultantSuccess = function (data) {
         
-        // Market Listings
+        console.log('Success callback for queryAllConsultant !');
+
+        // Biz Logic
         $appScope.Consultants =  BlockchainService.ParseData(data);  
 
         // Return Status / Messages 
         $appScope.Success = data.success;
         $appScope.Message = data.message;
 
+        console.log('$appScope: ', $appScope);
+
         // jQuery Functions
+    };
+
+    var queryAllSOWSuccess = function(data){
+
+        console.log('Success callback for queryAllSOW!');
+
+        // Biz Logic
+        $appScope.SOWList =  BlockchainService.ParseData(data);  
+
+        // Return Status / Messages 
+        $appScope.Success = data.success;
+        $appScope.Message = data.message;
+
+        console.log('$appScope: ', $appScope);
+
+        // jQuery Functions
+    };
+    
+    var reloadConsultants = function() {
+
+        // Show success modal
+        $('#addConsultantModal').modal('hide');       
+        setTimeout(function(){
+            $('#addConsultantSuccessModal').modal('show');  // set timer to show 
+        }, 3000);  
+        
+
+        setTimeout(function(){
+            console.log('run query all consultants')
+            BlockchainService.GetData('/get_all_consultants', null, SharedService.ToSuccessFunctionModel(queryAllConsultantSuccess), failFunctions);
+        }, 8000);  
     };
 
     // Default Fail Var(s)
     var failFunctions = SharedService.ToErrorFunctionModel(function (data) {
-        $appScope.Error = data.message;
-        console.log(data);
+        console.log('Error:', data);
         // [Alert Box logic goes here]
     });
 
     // Constructor(s)
     function init($scope) {
+        // Set Global App Scope
         $appScope = $scope;
 
         // Load Market Data
-        BlockchainService.GetData('/get_all_consultants', null, SharedService.ToSuccessFunctionModel(success), failFunctions);
+        BlockchainService.GetData('/get_all_consultants', null, SharedService.ToSuccessFunctionModel(queryAllConsultantSuccess), failFunctions);
+        // Load SOW Data
+        BlockchainService.GetData('/get_all_sows', null, SharedService.ToSuccessFunctionModel(queryAllSOWSuccess), failFunctions);
     }
 
     // Method(s)
@@ -55,10 +92,11 @@ App.factory('CompanyService', function ($http, BlockchainService, SharedService)
             ClientId: clientId.toString()
         };
 
-        // var consultant =  BlockchainService.Parameterize(record);
+        console.log(consultant);
+        BlockchainService.GetData('/add_consultant', { consultant: consultant }, SharedService.ToSuccessFunctionModel(function(data){}), failFunctions);
 
-        // console.log(consultant);
-        BlockchainService.GetData('/add_consultant', {consultant: consultant}, SharedService.ToSuccessFunctionModel(success), failFunctions);
+        // Attempt to force reload of consultants 
+        reloadConsultants();
     }
 
     return {

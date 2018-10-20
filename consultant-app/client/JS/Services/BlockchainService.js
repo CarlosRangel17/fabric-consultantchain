@@ -19,6 +19,9 @@ App.factory('BlockchainService', function ($http, SharedService) {
             data: parameters,
             headers: { "Content-Type": "application/json" }
         }).then(function successCallback(response) {
+            // console.log("The Magic begins...");
+            // console.log(response);
+            // console.log("The Magic will continue...");
             if (response.status === 200) {
                 SuccessHandling(successFunctions, response.data);
             } else {
@@ -41,6 +44,9 @@ App.factory('BlockchainService', function ($http, SharedService) {
             params: parameters,
             headers: { "Content-Type": "application/json" }
         }).then(function successCallback(response) {
+            // console.log("The Magic begins...");
+            // console.log(response);
+            // console.log("The Magic will continue...");
             if (response.status === 200) {
                 SuccessHandling(successFunctions, response.data);
             } else {
@@ -55,7 +61,9 @@ App.factory('BlockchainService', function ($http, SharedService) {
         // Run any necessary functions
         angular.forEach(successFunctions, function (model, key) {
             if (!isNullOrWhiteSpace(model.parameter)) {
+                console.log('run function')
                 model.runFunction(model.parameter);
+                console.log('complete function')
             } else {
                 model.runFunction(data);
             }

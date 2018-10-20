@@ -13,6 +13,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/hyperledger/fabric/common/util"
 	// "github.com/projects/fabric-consultantchain/domains"
 	"strconv"
 
@@ -88,6 +89,14 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.initLedger(APIstub)
 	} else if function == "recordConsultant" {
 		return s.recordConsultant(APIstub, args)
+	} else if function == "queryAllSow" {
+		chainCodeArgs := util.ToChaincodeArgs("queryAllSow", "")
+		response := APIstub.InvokeChaincode("sow-app", chainCodeArgs, "myChannel")
+
+		if response.Status != shim.OK {
+			return shim.Error(response.Message)
+		}
+		return shim.Success(nil)
 	}
 
 	return shim.Error("Invalid Smart Contract function name.")
@@ -131,7 +140,7 @@ func (s *SmartContract) initLedger(APIstub shim.ChaincodeStubInterface) sc.Respo
 func (s *SmartContract) recordConsultant(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
 	if len(args) != 13 {
-		return shim.Error("Incorrect number of arguments. Expected 12")
+		return shim.Error("Incorrect number of arguments. Expected 13")
 	}
 
 	var consultant = Consultant{
@@ -235,8 +244,8 @@ func (s *SmartContract) changeConsultantHolder(APIstub shim.ChaincodeStubInterfa
 // - param(s):
 func (s *SmartContract) requestConsultant(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 
-	if len(args) != 14 {
-		return shim.Error("Incorrect number of arguments. Expecting 14")
+	if len(args) != 15 {
+		return shim.Error("Incorrect number of arguments. Expecting 15")
 	}
 
 	var sow = SOW{
@@ -260,7 +269,7 @@ func (s *SmartContract) requestConsultant(APIstub shim.ChaincodeStubInterface, a
 	err := APIstub.PutState(args[0], sowAsBytes)
 
 	if err != nil {
-		return shim.Error(fmt.Sprintf("Failed to record consultant: %s", args[0]))
+		return shim.Error(fmt.Sprintf("Failed to request consultant: %s", args[0]))
 	}
 
 	return shim.Success(sowAsBytes)

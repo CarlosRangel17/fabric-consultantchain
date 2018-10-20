@@ -47,6 +47,7 @@ App.factory('SharedService', function ($http) {
             data: parameters,
             headers: { "Content-Type": "application/json" }
         }).then(function successCallback(response) {
+            console.log('post success')
             if (response.data.success) {
                 SuccessHandling(successFunctions, response.data);
             } else {

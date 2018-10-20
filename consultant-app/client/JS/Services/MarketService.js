@@ -73,7 +73,7 @@ App.factory('MarketService', function ($http, BlockchainService, SharedService) 
         var today = SharedService.GetTodayDate();
         console.log(today)
         // Initialize an SOW object
-        var record = {
+        var sow = {
             Id: ((today.getTime() * 10000) + 621355968000000000),
             DateCreated: todayShortDate,
             TermStartDate: request.StartDate,
@@ -91,8 +91,9 @@ App.factory('MarketService', function ($http, BlockchainService, SharedService) 
             Requirement3: request.Requirement3
         };
 
-        var sow = BlockchainService.Parameterize(record);
-        BlockchainService.PostData('/request_consultant', { sow: sow }, SharedService.ToSuccessFunctionModel(requestSuccess), failFunctions);
+        console.log(record)
+        // var sow = BlockchainService.Parameterize(record);
+        BlockchainService.GetData('/request_consultant', { sow: sow }, SharedService.ToSuccessFunctionModel(requestSuccess), failFunctions);
     }
 
     return {

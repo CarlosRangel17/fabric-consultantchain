@@ -2,8 +2,6 @@
 
 'use strict';
 
-console.log('hat');
-
 var App = angular.module('App', ['ngRoute']);
 
 // App.controller('HomeController', HomeController);
