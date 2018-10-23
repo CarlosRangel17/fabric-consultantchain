@@ -82,7 +82,7 @@
                     </div>
                     <div class="panel-body">
                          <!--Consultant Box-->
-                         <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants | orderBy: '-DateCreated'">
+                         <div class="consultant-box col-md-4 col-lg-4" ng-repeat="consultant in Consultants | orderBy: '-DateCreated'">
                                 <span class="pull-right btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                 </span>
@@ -124,7 +124,7 @@
                     </div>
                     <div class="panel-body">
                          <!--Consultant Box-->
-                         <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants | filter:{ClientId:''}:true">
+                         <div class="consultant-box col-md-4 col-lg-4" ng-repeat="consultant in Consultants | filter:{ClientId:''}:true">
                                 <span class="pull-right btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                 </span>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="panel-body">
                          <!--Consultant Box-->
-                         <div class="consultant-box col-md-4" ng-repeat="consultant in Consultants | filter:{ClientId:'!'}:true">
+                         <div class="consultant-box col-md-4 col-lg-4" ng-repeat="consultant in Consultants | filter:{ClientId:'!'}:true">
                                 <span class="pull-right btn btn-warning">
                                     <i class="fa fa-pencil"></i>
                                 </span>

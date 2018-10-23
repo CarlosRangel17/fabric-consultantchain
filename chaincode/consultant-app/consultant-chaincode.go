@@ -13,7 +13,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/hyperledger/fabric/common/util"
+	// "github.com/hyperledger/fabric/common/util"
 	// "github.com/projects/fabric-consultantchain/domains"
 	"strconv"
 
@@ -89,15 +89,17 @@ func (s *SmartContract) Invoke(APIstub shim.ChaincodeStubInterface) sc.Response 
 		return s.initLedger(APIstub)
 	} else if function == "recordConsultant" {
 		return s.recordConsultant(APIstub, args)
-	} else if function == "queryAllSow" {
-		chainCodeArgs := util.ToChaincodeArgs("queryAllSow", "")
-		response := APIstub.InvokeChaincode("sow-app", chainCodeArgs, "myChannel")
-
-		if response.Status != shim.OK {
-			return shim.Error(response.Message)
-		}
-		return shim.Success(nil)
 	}
+	// TODO: Figure out how to call different chaincodes
+	// else if function == "queryAllSow" {
+	// 	chainCodeArgs := util.ToChaincodeArgs("queryAllSow", "")
+	// 	response := APIstub.InvokeChaincode("sow-app", chainCodeArgs, "myChannel")
+
+	// 	if response.Status != shim.OK {
+	// 		return shim.Error(response.Message)
+	// 	}
+	// 	return shim.Success(nil)
+	// }
 
 	return shim.Error("Invalid Smart Contract function name.")
 }

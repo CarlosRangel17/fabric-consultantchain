@@ -66,7 +66,7 @@ App.factory('CompanyService', function ($http, BlockchainService, SharedService)
         // Load Market Data
         BlockchainService.GetData('/get_all_consultants', null, SharedService.ToSuccessFunctionModel(queryAllConsultantSuccess), failFunctions);
         // Load SOW Data
-        BlockchainService.GetData('/get_all_sows', null, SharedService.ToSuccessFunctionModel(queryAllSOWSuccess), failFunctions);
+        // BlockchainService.GetData('/get_all_sows', null, SharedService.ToSuccessFunctionModel(queryAllSOWSuccess), failFunctions);
     }
 
     // Method(s)
@@ -89,7 +89,7 @@ App.factory('CompanyService', function ($http, BlockchainService, SharedService)
             Skill1: newConsultant.Skill1,
             Skill2: newConsultant.Skill2,
             Skill3: newConsultant.Skill3,
-            ClientId: clientId.toString()
+            ClientId: '' //clientId.toString()
         };
 
         console.log(consultant);

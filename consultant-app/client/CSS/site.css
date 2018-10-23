@@ -194,6 +194,7 @@ app-partial{
   background-color: #555;
   padding: 15px;
   overflow: auto;
+  width: 100%;
 }
 
 .header-add-info {

@@ -7,9 +7,9 @@ module.exports = function(app){
   app.get('/get_all_consultants', function(req, res){
     network.get_all_consultants(req, res); 
   });
-  app.get('/get_all_sows', function(req, res){
-    network.get_all_sows(req, res); 
-  });
+  // app.get('/get_all_sows', function(req, res){
+  //   network.get_all_sows(req, res); 
+  // });
   app.get('/add_consultant', function(req, res){
     // var consultant = req.query.consultant;
     // console.log('Attempting to add consultant: { consultant: ', consultant, '}');

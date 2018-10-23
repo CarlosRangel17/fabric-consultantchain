@@ -341,11 +341,11 @@ return{
 	get_all_sows: function(req, res) {
 		callLog("Enter controller.js: get_all_sows \n - Getting all sogeti sows from database:");
 
-		var consultant = {
+		var sow = {
 			Key: '' // For now we pass a blank string to query all sows,
 		};
 
-		var model = GetRecordMapModel(consultant, 'consultant-app', 'queryAllSows', 'myChannel');
+		var model = GetRecordMapModel(sow, 'consultant-app', 'queryAllSows', 'myChannel');
 
 		ReadBlockchain(model, res);
 	},
