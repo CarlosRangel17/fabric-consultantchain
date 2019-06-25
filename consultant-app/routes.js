@@ -24,4 +24,8 @@ module.exports = function(app){
   app.get('/request_consultant/:sow', function(req, res){
     network.request_consultant(req, res);
   });
+  app.get('/get_all_sows', function(req, res) {
+    console.log('[routes.js] get all sows requested');
+    network.get_all_sows(req, res);
+  });
 }

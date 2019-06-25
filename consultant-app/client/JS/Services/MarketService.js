@@ -49,19 +49,26 @@ App.factory('MarketService', function ($http, BlockchainService, SharedService) 
 
     // Constructor(s)
     function init($scope) {
+        $('#app-loading').addClass('animated fadeIn');
         $appScope = $scope;
+        $appScope.showMarket = false;
 
         // Load Market Data
         // TODO: Only show Consultant's that aren't reserved 
         BlockchainService.GetData('/get_all_consultants', null, SharedService.ToSuccessFunctionModel(success), failFunctions);
+        BlockchainService.GetData('/get_all_sows', null, function(data) { console.log('sow request:', data) }, failFunctions);
 
         setTimeout(function(){
+            $('#app-loading').addClass('animated fadeOut');
+
             $(document).ready(function() { 
                 $('.responsive').slick({
                     infinite: false,
                     slidesToShow: 3,
                     slidesToScroll: 3
                   });
+                  $appScope.showMarket = true;
+                  $appScope.$apply();
             });
         }, 1000);
     }

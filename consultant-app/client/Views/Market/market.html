@@ -2,7 +2,10 @@
 
 <link href="../../CSS/market.css" rel="stylesheet">  
 
-<div class="container app-blue" ng-init="init()">
+<div class="container">
+    <div id="app-loading">Loading...</div>
+</div>
+<div class="container app-blue" ng-init="init()" ng-show="showMarket">
     <h1 >Market</h2>
     <div class="row">
                <!-- Table Search -->
@@ -258,7 +261,7 @@
                 </div>
         
         <!-- Market Table > -->
-        <!-- <div class="table-assets col-md-12">
+        <div class="table-assets col-md-12">
                 <table id="market-table" class="table table-striped">
                     <thead>
                         <tr>
@@ -279,7 +282,7 @@
                         </tr>
                     </tbody>
                 </table>
-            </div> -->
+            </div>
     </div>
 </div>
 

@@ -58,16 +58,32 @@ type SOW struct {
 }
 
 func Seed() []Consultant {
+
+	// Hard Coded LinkedIn Images
+
+	// Angular 7 Seed List Version
 	seedList := []Consultant{
-		{DateCreated: "2017-04-24", FirstName: "Carlos", LastName: "Rangel", AvatarImage: "carlos.jpg", Title: "Consultant", RatePerHour: "20", SkillType: "Blockchain", SkillLevel: "3", Skill1: "Ethereum", Skill2: "", Skill3: "", ClientId: "1"},
-		{DateCreated: "2017-05-07", FirstName: "Keyurkumar", LastName: "Patel", AvatarImage: "keyur.jpeg", Title: "Consultant", RatePerHour: "20", SkillType: "BI", SkillLevel: "3", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: "1"},
-		{DateCreated: "2017-05-07", FirstName: "Puneet", LastName: "Mittal", AvatarImage: "puneet.jpg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Cloud", SkillLevel: "3", Skill1: "Azure", Skill2: "", Skill3: "", ClientId: "1"},
-		{DateCreated: "2015-09-24", FirstName: "Aval", LastName: "Pandya", AvatarImage: "aval.jpeg", Title: "Manager", RatePerHour: "30", SkillType: "BA", SkillLevel: "4", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: ""},
-		{DateCreated: "2015-01-20", FirstName: "Hines", LastName: "Vaughan", AvatarImage: "hines.jpeg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Mobile", SkillLevel: "4", Skill1: "Xamarin", Skill2: "", Skill3: "", ClientId: ""},
-		{DateCreated: "2018-06-24", FirstName: "Brandon", LastName: "Timmons", AvatarImage: "timmons.jpeg", Title: "Associate Consultant", RatePerHour: "15", SkillType: "Web", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
-		{DateCreated: "2017-03-24", FirstName: "Peter", LastName: "Menh", AvatarImage: "peter.jpeg", Title: "Associate Consultant", RatePerHour: "15", SkillType: "Web", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
-		{DateCreated: "2014-06-01", FirstName: "Mark", LastName: "Salinas", AvatarImage: "mark.jpeg", Title: "Manager", RatePerHour: "30", SkillType: "Cloud", SkillLevel: "4", Skill1: "Azure", Skill2: "AWS", Skill3: "", ClientId: ""},
+		{DateCreated: "2017-04-24", FirstName: "Carlos", LastName: "Rangel", AvatarImage: "https://media.licdn.com/dms/image/C4E03AQFN2ftEHgSZBQ/profile-displayphoto-shrink_200_200/0?e=1567036800&v=beta&t=oYiZ6tkv2yoTcMpqHDUNnZfpO_Oo-YYjJ2tv23jGxyw", Title: "Consultant", RatePerHour: "20", SkillType: "2", SkillLevel: "3", Skill1: "Ethereum", Skill2: "", Skill3: "", ClientId: "1"},
+		{DateCreated: "2017-05-07", FirstName: "Keyurkumar", LastName: "Patel", AvatarImage: "https://media.licdn.com/dms/image/C4E03AQFUl-ubR5hmhg/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=MjG2ahJrdF2R0SxhSpXppzQ7bnOC8DNjp1Wzc9Vbdpc", Title: "Consultant", RatePerHour: "20", SkillType: "6", SkillLevel: "3", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: "1"},
+		{DateCreated: "2017-05-07", FirstName: "Puneet", LastName: "Mittal", AvatarImage: "https://media.licdn.com/dms/image/C4D03AQGRNWlTsjUZjQ/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=JkuGfzRs0VVgP-A22HP3tWEsh1C9mkug439ZeBK0h5k", Title: "Senior Consultant", RatePerHour: "25", SkillType: "5", SkillLevel: "3", Skill1: "Azure", Skill2: "", Skill3: "", ClientId: "1"},
+		{DateCreated: "2015-09-24", FirstName: "Aval", LastName: "Pandya", AvatarImage: "https://media.licdn.com/dms/image/C5603AQE-WJGXAVQxgQ/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=hieKVHFht2HkoDz3RqK9Y3GcEiS9iTmBhL1elWpAG90", Title: "Manager", RatePerHour: "30", SkillType: "6", SkillLevel: "4", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: ""},
+		{DateCreated: "2015-01-20", FirstName: "Hines", LastName: "Vaughan", AvatarImage: "https://media.licdn.com/dms/image/C4E03AQHyMdIww-FJjA/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=lNytqX5xUaJsIrmvDuhQHtcxcniVjEPsn-RFAoJyB1A", Title: "Senior Consultant", RatePerHour: "25", SkillType: "4", SkillLevel: "4", Skill1: "Xamarin", Skill2: "", Skill3: "", ClientId: ""},
+		{DateCreated: "2018-06-24", FirstName: "Brandon", LastName: "Timmons", AvatarImage: "https://media.licdn.com/dms/image/C4E03AQEYOFuiK_0_dw/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=mqXuTwRaa3w0-9xu4m8dmhfpL0Nc8cNsrWeAfY1NQoU", Title: "Associate Consultant", RatePerHour: "15", SkillType: "3", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
+		{DateCreated: "2017-03-24", FirstName: "Peter", LastName: "Menh", AvatarImage: "https://media.licdn.com/dms/image/C4E03AQHOovvJzQ71mQ/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=zsgyWssRyoFgiYIUzSRUaHAPSasdM52Xp9HoAwVUM4E", Title: "Associate Consultant", RatePerHour: "15", SkillType: "3", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
+		{DateCreated: "2014-06-01", FirstName: "Mark", LastName: "Salinas", AvatarImage: "https://media.licdn.com/dms/image/C4E03AQFuWLbEfv6Lmw/profile-displayphoto-shrink_800_800/0?e=1567036800&v=beta&t=1HajO4fZn14pWQqA1w6BBvG5MSlyKaoCpoGChYB0haI", Title: "Manager", RatePerHour: "30", SkillType: "5", SkillLevel: "4", Skill1: "Azure", Skill2: "AWS", Skill3: "", ClientId: ""},
 	}
+
+	// AngularJS Seed List Version
+	// seedList := []Consultant{
+	// 	{DateCreated: "2017-04-24", FirstName: "Carlos", LastName: "Rangel", AvatarImage: "carlos.jpg", Title: "Consultant", RatePerHour: "20", SkillType: "Blockchain", SkillLevel: "3", Skill1: "Ethereum", Skill2: "", Skill3: "", ClientId: "1"},
+	// 	{DateCreated: "2017-05-07", FirstName: "Keyurkumar", LastName: "Patel", AvatarImage: "keyur.jpeg", Title: "Consultant", RatePerHour: "20", SkillType: "BI", SkillLevel: "3", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: "1"},
+	// 	{DateCreated: "2017-05-07", FirstName: "Puneet", LastName: "Mittal", AvatarImage: "puneet.jpg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Cloud", SkillLevel: "3", Skill1: "Azure", Skill2: "", Skill3: "", ClientId: "1"},
+	// 	{DateCreated: "2015-09-24", FirstName: "Aval", LastName: "Pandya", AvatarImage: "aval.jpeg", Title: "Manager", RatePerHour: "30", SkillType: "BA", SkillLevel: "4", Skill1: "PowerBI", Skill2: "", Skill3: "", ClientId: ""},
+	// 	{DateCreated: "2015-01-20", FirstName: "Hines", LastName: "Vaughan", AvatarImage: "hines.jpeg", Title: "Senior Consultant", RatePerHour: "25", SkillType: "Mobile", SkillLevel: "4", Skill1: "Xamarin", Skill2: "", Skill3: "", ClientId: ""},
+	// 	{DateCreated: "2018-06-24", FirstName: "Brandon", LastName: "Timmons", AvatarImage: "timmons.jpeg", Title: "Associate Consultant", RatePerHour: "15", SkillType: "Web", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
+	// 	{DateCreated: "2017-03-24", FirstName: "Peter", LastName: "Menh", AvatarImage: "peter.jpeg", Title: "Associate Consultant", RatePerHour: "15", SkillType: "Web", SkillLevel: "2", Skill1: "ASP.NET MVC", Skill2: "", Skill3: "", ClientId: ""},
+	// 	{DateCreated: "2014-06-01", FirstName: "Mark", LastName: "Salinas", AvatarImage: "mark.jpeg", Title: "Manager", RatePerHour: "30", SkillType: "Cloud", SkillLevel: "4", Skill1: "Azure", Skill2: "AWS", Skill3: "", ClientId: ""},
+	// }
 	return seedList
 }
 

@@ -345,7 +345,7 @@ return{
 			Key: '' // For now we pass a blank string to query all sows,
 		};
 
-		var model = GetRecordMapModel(sow, 'consultant-app', 'queryAllSows', 'myChannel');
+		var model = GetRecordMapModel(sow, 'consultant-sow-app', 'queryAllSOWs', 'myChannel');
 
 		ReadBlockchain(model, res);
 	},
@@ -443,7 +443,7 @@ return{
 
 		// Retrieve Blockchain Parameter Mapping Model
 		// param(s): mapRecord, chaincodeId, chaincodeFunction, channelId
-		var model = GetRecordMapModel(sowRequest, 'consultant-app', 'requestConsultant', 'mychannel');
+		var model = GetRecordMapModel(sowRequest, 'consultant-sow-app', 'requestConsultant', 'mychannel');
 		console.log(model);
 
 		WriteToBlockchain(model, res);

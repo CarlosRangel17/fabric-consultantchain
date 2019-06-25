@@ -12,6 +12,7 @@ var fs            = require('fs');
 var path          = require('path');
 var util          = require('util');
 var os            = require('os');
+var cors = require('cors');
 
 // Load all of our middleware
 // configure app to use bodyParser()
@@ -20,9 +21,12 @@ var os            = require('os');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 // instantiate the app
 var app = express();
 
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:4200'}));
 // this line requires and runs the code from our routes.js file and passes it app
 require('./routes.js')(app);
 

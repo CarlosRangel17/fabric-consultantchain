@@ -155,10 +155,9 @@
     display: block;
     margin-top: 10px;
     border: 5px solid #fff;
-    padding: 15px 0px 5px 122px;
-
+    padding: 15px 0px 5px 0px; /*122px*/
+    padding-left: 25%;
     width: 100%;
-
     font-weight: 300;
     font-size: 30px;
     color: #FFF;

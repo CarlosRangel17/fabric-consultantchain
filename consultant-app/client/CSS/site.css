@@ -220,3 +220,9 @@ app-partial{
   color: #fff;
   cursor: pointer;
 }
+
+#app-loading{
+  -vendor-animation-duration: 3s;
+  -vendor-animation-delay: 2s;
+  -vendor-animation-iteration-count: infinite;
+}
